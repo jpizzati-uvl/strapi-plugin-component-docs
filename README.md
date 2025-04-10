@@ -2,6 +2,12 @@
 
 This Strapi plugin adds an input component to the Strapi admin panel that allows users to view documentation related to a component via a modal or external link. It is particularly useful for displaying component-specific documentation directly in the Strapi admin interface.
 
+## Preview
+
+![Documentation Image](assets/docs-image-1.png)
+
+![Documentation Image](assets/docs-image-2.png)
+
 ## Features
 
 - Displays a **"View Documentation"** button in the Strapi admin panel.
