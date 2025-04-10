@@ -4,9 +4,9 @@ This Strapi plugin adds an input component to the Strapi admin panel that allows
 
 ## Preview
 
-![Documentation Image](assets/docs-image-1.png)
+![Documentation Image](https://iili.io/3aNyqCb.png)
 
-![Documentation Image](assets/docs-image-2.png)
+![Documentation Image](https://iili.io/3aNyKZu.png)
 
 ## Features
 
