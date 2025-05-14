@@ -34,6 +34,14 @@ interface InputProps {
   error?: string;
 }
 
+// Define styled component outside of the render method
+const ModalContent = styled(Modal.Content)`
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+`;
+
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ attribute }, ref) => {
     const { formatMessage } = useIntl();
@@ -48,13 +56,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       id: 'component-docs.view-docs',
       defaultMessage: 'View Documentation',
     });
-
-    const ModalContent = styled(Modal.Content)`
-      width: 100vw !important;
-      height: 100vh !important;
-      max-width: 100% !important;
-      max-height: 100% !important;
-    `;
 
     return (
       <>

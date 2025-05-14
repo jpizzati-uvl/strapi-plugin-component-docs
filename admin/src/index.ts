@@ -1,6 +1,7 @@
 import { PLUGIN_ID } from './pluginId';
 import { Initializer } from './components/Initializer';
 import {PluginIcon} from './components/PluginIcon';
+import * as yup from 'yup';
 
 export default {
   register(app: any) {
@@ -68,19 +69,48 @@ export default {
               defaultMessage: 'This field will not show up in the API response',
             },
           },
-        ]
+        ],
+        validator: (args: any) => {
+          // Extract options from the modifiedData
+          const { url: configUrl } = args[2].modifiedData.options || {};
+          
+          const errorMessages = {
+            required: 'This field is required',
+            invalidUrl: 'The URL must be a valid URL format.'
+          };
+          
+          const validateUrl = (url: string | undefined): boolean => {
+            if (!url || url.trim() === '') return false;
+            
+            // Basic URL validation
+            try {
+              const urlPattern = /^(https?:\/\/|\/)/i;
+              return urlPattern.test(url.trim());
+            } catch (e) {
+              return false;
+            }
+          };
+          
+          // Create validation function similar to the reference pattern
+          const createValidation = (fieldValue: string | undefined) => {
+            const baseSchema = yup.string().required(errorMessages.required);
+
+            return baseSchema.test('url', {
+              id: 'error.url',
+              defaultMessage: errorMessages.invalidUrl,
+            }, validateUrl);
+          };
+          
+          // Return validation result
+          return {
+            url: createValidation(configUrl),
+          };
+        },
       },
     })
   },
 
-  validator(value:any, config:any) {
-    console.log(value, 'value');
-    if (!config?.url || config.url.trim() === '') {
-      return 'The URL field in configuration is required.';
-    }
 
-    return true;
-  },
 
   async registerTrads({ locales }: { locales: string[] }) {
     return Promise.all(
